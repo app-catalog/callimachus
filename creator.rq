@@ -11,7 +11,7 @@ PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 
 SELECT ?resource ?label  
 {
-    ?resource rdfs:label ?label .
+    ?resource a vcard:Organization ?label .
     FILTER  
             ((lang(?label) = '' || lang(?label) = 'pt') &&
         	regex(str(?label), "$keyword", "i")) . 
