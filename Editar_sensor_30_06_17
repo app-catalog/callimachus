@@ -1,0 +1,144 @@
+<html version="XHTML+RDFa 1.0" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:ssn="http://purl.oclc.org/NET/ssnx/ssn/"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+    xmlns:gn="http://www.geonames.org/ontology#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dbo="http://dbpedia.org/ontology/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:tute="http://callimachusproject.org/2014/03/tutorial#"
+    xmlns:dul="http://www.loa.istc.cnr.it/ontologies/DUL.owl#">
+    
+<head>
+    <title resource="?this">{rdfs:label}</title>
+    
+    <script type="text/javascript" src="creator.js"></script>
+    
+    <script type="text/javascript" src="isDefinedBy.js"></script>
+    
+    <script type="text/javascript" src="City.js"></script>
+    
+    <script type="text/javascript" src="Variables.js"></script>
+    
+    
+    
+</head>
+<body resource="?this">
+    <div class="container">
+        <div class="page-header">
+            <h1 property="rdfs:label"></h1>
+        </div>
+        <form id="form" role="form" method="POST" action="" enctype="application/sparql-update" resource="?this" class="row"
+                onsubmit="calli.submitUpdate(comparison,event)">
+            <fieldset class="col-sm-4">
+                <div class="form-group">
+                    <label for="observes">Variável medida</label>
+                    <select id="Variables" multiple="multiple" class="form-control"
+                        onchange="calli.updateResource(event, 'ssn:observes')">
+                        <option selected="selected" rel="ssn:observes" resource="?Variables" value="{ssn:observes}"> {skos:prefLabel} </option>   
+                            
+                    </select> 
+                </div>
+            
+                <div class="form-group">
+                    <label>Responsável pelo cadastro)</label>
+                    <select id="isDefinedBy" class="form-control" multiple="multiple"
+                        onchange="calli.updateResource(event, 'rdfs:isDefinedBy')">
+                        <option selected="selected" rel="rdfs:isDefinedBy" resource="?isDefinedBy" value="{?isDefinedBy}">{foaf:name} </option>
+                    </select>  
+                </div>
+                
+                <div class="form-group">
+                    <label>Fabricante (Nome fantasia)</label>
+                    <select id="creator" class="form-control" multiple="multiple"
+                        onchange="calli.updateResource(event, 'dcterms:creator')">
+                        <option selected="selected" rel="dcterms:creator" resource="?creator" value="{?creator}"> {rdfs:label} </option>
+                    </select>  
+                </div>
+                <div class="form-group">
+                    <label for="GeonamesFeature">Dados de localização</label>
+                    <div rel="gn:locationMap">
+                        <div id="locationMap" typeof="gn:GeonamesFeature">
+                            <label for="aa"> Cidade:</label>   
+                            <select id="City" class="form-control" multiple="multiple" placeholder="Cidade"
+                                onchange="calli.updateResource(event, 'dul:hasLocation')">
+                                <option selected="selected" rel="dul:hasLocation" resource="?City" value="{?City}">{rdfs:label}</option> 
+                            </select>
+                            <label for="a"> País:</label>
+                            <input type="text" class="form-control" value="{gn:parentCountry}" placeholder="País"
+                                onchange="calli.updateProperty(event, 'gn:parentCountry')"/>
+                            <label for="b"> Código Postal:</label>
+                            <input type="text" class="form-control" value="{gn:postalCode}" placeholder="Codigo Postal"
+                                onchange="calli.updateProperty(event, 'gn:postalCode')"/>
+                            <label for="c"> Latitude:</label>
+                            <input type="text" class="form-control" value="{gn:lat}" placeholder="Latitude"
+                                onchange="calli.updateProperty(event, 'gn:lat')"/>
+                            <label for="d"> Longitude:</label>
+                            <input type="text" class="form-control" value="{gn:long}" placeholder="Longitude"
+                                onchange="calli.updateProperty(event, 'gn:long')"/>
+                        </div>
+                    </div>
+                </div>
+                
+            </fieldset>
+            <fieldset class="col-sm-4">
+                <div class="form-group">
+                    <label for="MeasurementCapability">Informações técnicas</label>
+                    <div rel="ssn:hasMeasurementCapability">
+                        <div id="hasMeasurementCapability" typeof="ssn:MeasurementCapability">
+                            <label for="t"> Condição de funcionamento:</label>
+                            <input type="text" class="form-control" value="{ssn:inCondition}" placeholder="Condição de funcionamento"
+                                onchange="calli.updateProperty(event, 'ssn:inCondition')"/>
+                             <div rel="ssn:hasMeasurementProperty">    
+                                <div id="hasMeasurementProperty" typeof="ssn:MeasurementProperty">
+                                   <label for="f"> Precisão:</label>
+                                    <input type="text" class="form-control" value="{ssn:Precision}" placeholder="Precisão"
+                                        onchange="calli.updateProperty(event, 'ssn:Precision')"/>
+                                    <label for="g"> Resolução:</label>
+                                    <input type="text" class="form-control" value="{ssn:Resolution}" placeholder="Resolução"
+                                        onchange="calli.updateProperty(event, 'ssn:Resolution')"/>
+                                    <label for="h"> Sensibilidade:</label>
+                                    <input type="text" class="form-control" value="{ssn:Sensitivity}" placeholder="Sensibilidade"
+                                        onchange="calli.updateProperty(event, 'ssn:Sensitivity')"/>
+                                    <label for="i"> Tempo de resposta:</label>
+                                    <input type="text" class="form-control" value="{ssn:ResponseTime}" placeholder="Tempo de resposta"
+                                        onchange="calli.updateProperty(event, 'ssn:ResponseTime')"/>     
+                                </div>
+                             </div>   
+                        </div>
+                    </div>
+                </div>    
+                <div class="form-group">
+                    <label for="OperatingRange">Range de medição</label>
+                    <textarea id="hasOperatingRange" class="form-control"
+                        onchange="calli.updateProperty(event, 'ssn:hasOperatingRange')">{ssn:hasOperatingRange}</textarea>
+                </div>
+                 <div class="form-group">
+                    <div id="thumbnail" dropzone="link string:text/uri-list" ondrop="return calli.insertResource(event)">
+                        <label for="thumbnail">Foto do sensor ou do sistema <a href="../Images/?view" title="Selecione a foto" onclick="return calli.selectResource(event)" class="glyphicon glyphicon-picture" /></label>
+                        <div rel="foaf:depiction">
+                            <span resource="?thumbnail" typeof="foaf:Image">
+                                <img src="{?thumbnail}" style="max-width:100%" />
+                                <a href="{?thumbnail}" title="Remove" onclick="return calli.removeResource(event)" class="glyphicon glyphicon-remove" />
+                            </span>
+                        </div>
+                    </div>                  
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" onclick="window.location.replace('?view')" class="btn btn-default">Cancel</button>
+                    <button type="button" onclick="calli.deleteResource(event)" class="btn btn-danger">Delete</button>
+                </div>
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+            comparison = calli.copyResourceData('#form');
+        </script>
+    </div>
+</body>
+</html>
